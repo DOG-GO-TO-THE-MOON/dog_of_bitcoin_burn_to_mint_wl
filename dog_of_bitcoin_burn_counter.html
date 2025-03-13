@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inscriptions Count</title>
+  <!-- Google Font inspired by Dog of Bitcoin's bold look -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Base styling: Dark background for the whole page */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Oswald', sans-serif;
+      background: #000;
+      color: #fff;
+    }
+    /* Header styling with flex layout */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      background: #000;
+      color: #fff;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid #333;
+    }
+    header img.logo {
+      width: 50px;
+      height: auto;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+    }
+    /* Main container with dark background */
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #111;
+      border: 1px solid #333;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      border-radius: 4px;
+    }
+    .count-box {
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+    /* Refresh button styling */
+    #refreshBtn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background: #ff9800;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    #refreshBtn:hover {
+      background: #e68900;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img class="logo" src="https://dogofbitcoin.com/dog_logo.svg" alt="Dog of Bitcoin Logo">
+    <h1>Inscriptions Count</h1>
+  </header>
+  <div class="container">
+    <div class="count-box">
+      Total Supply: <span id="totalSupply">Loading...</span>
+    </div>
+    <div class="count-box">
+      Circulating Supply (vindicated minus burned): <span id="circulatingSupply">Loading...</span>
+    </div>
+    <div class="count-box">
+      Burned: <span id="burnedCount">Loading...</span>
+    </div>
+    <button id="refreshBtn">Refresh Count</button>
+  </div>
+
+  <script>
+    async function countInscriptions() {
+      let totalSupply = 0;
+      let vindicatedCount = 0;
+      let burnedCount = 0;
+      let page = 0;
+      let more = true;
+      
+      // Dynamically fetch pages until no more pages are available.
+      while (more) {
+        const url = `https://ordinals.com/r/children/d45478cab2e1ebc295c6bbc85dae505aae417e088a23c0c8e6d33bfe345b992ei0/inscriptions/${page}`;
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          
+          if (data.children && Array.isArray(data.children)) {
+            data.children.forEach(child => {
+              totalSupply++;
+              if (child.charms && Array.isArray(child.charms)) {
+                if (child.charms.includes("vindicated")) {
+                  vindicatedCount++;
+                }
+                if (child.charms.includes("burned")) {
+                  burnedCount++;
+                }
+              }
+            });
+          }
+          more = data.more;
+          page++;
+        } catch (error) {
+          console.error(`Error fetching page ${page}:`, error);
+          more = false; // Stop if there's an error
+        }
+      }
+      
+      // Calculate circulating supply as vindicated minus burned.
+      const circulatingSupply = vindicatedCount - burnedCount;
+      
+      // Update the UI with the counts
+      document.getElementById('totalSupply').textContent = totalSupply;
+      document.getElementById('circulatingSupply').textContent = circulatingSupply;
+      document.getElementById('burnedCount').textContent = burnedCount;
+    }
+
+    // Run the count function on page load.
+    countInscriptions();
+
+    // Refresh the counts on button click.
+    document.getElementById('refreshBtn').addEventListener('click', () => {
+      document.getElementById('totalSupply').textContent = "Loading...";
+      document.getElementById('circulatingSupply').textContent = "Loading...";
+      document.getElementById('burnedCount').textContent = "Loading...";
+      countInscriptions();
+    });
+  </script>
+</body>
+</html>
