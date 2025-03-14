@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>$DOG | Genesis - Burn To Mint S2 Whitelist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$DOG | Genesis - Burn To Mint</title>
   <!-- Google Font inspired by Dog of Bitcoin's bold look -->
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -14,43 +15,134 @@
       background: #000;
       color: #fff;
     }
-    /* Header styling with flex layout */
+    /* Header styling with left, center, and right sections */
     header {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 1rem;
+      justify-content: space-between;
+      padding: 1.5rem;
       background: #000;
-      color: #fff;
-      padding: 1.5rem 0;
       border-bottom: 1px solid #333;
     }
-    header img.logo {
+    .header-left img.logo {
       width: 50px;
       height: auto;
     }
-    header h1 {
+    .header-center h1 {
       margin: 0;
       font-size: 2.5rem;
-      letter-spacing: 2px;
+      text-align: center;
+      flex: 1;
     }
-    /* Main container with dark background */
-    .container {
+    .header-right nav a {
+      color: #ff9800;
+      text-decoration: none;
+    }
+    /* Container for main sections */
+    .container, .instructions-phase {
       max-width: 800px;
+      width: 90%;
       margin: 2rem auto;
       padding: 2rem;
       background: #111;
       border: 1px solid #333;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
       border-radius: 4px;
     }
+    /* Phase 1: Text Instructions styling */
+    .instructions-phase h2 {
+      margin-top: 0;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .instructions-phase p {
+      font-size: 1.2rem;
+      line-height: 1.5;
+      margin: 1rem 0;
+      text-align: left;
+    }
+    .instructions-phase button {
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background: #ff9800;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+      display: block;
+      width: 100%;
+    }
+    .instructions-phase button:hover {
+      background: #e68900;
+    }
+    /* Custom tooltip for disabled button in Phase 2 */
+    .instructions-phase button[disabled] {
+      position: relative;
+    }
+    .instructions-phase button[disabled]:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: #fff;
+      padding: 0.5rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      margin-bottom: 0.5rem;
+      z-index: 10;
+      pointer-events: none;
+    }
+    /* Responsive YouTube embeds with proper aspect ratio */
+    iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      margin: 1rem 0;
+    }
+    /* Accordion for instructions in Phase 3 */
+    .accordion {
+      background: #222;
+      border: 1px solid #333;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+    .accordion-header {
+      padding: 1rem;
+      cursor: pointer;
+      background: #333;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .accordion-header span.arrow {
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    .accordion-content {
+      display: none;
+      padding: 1rem;
+      background: #222;
+    }
+    /* Supply Data Section */
     .count-box {
       margin-bottom: 1.5rem;
       font-size: 1.5rem;
     }
-    /* Refresh button styling */
-    #refreshBtn {
-      display: inline-block;
+    /* Warning section styling */
+    .warning {
+      background: #222;
+      border: 1px solid #333;
+      padding: 1rem;
+      margin-top: 2rem;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+    /* Button styling for Refresh and CTA */
+    button {
       padding: 0.75rem 1.5rem;
       font-size: 1rem;
       background: #ff9800;
@@ -60,17 +152,99 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-    #refreshBtn:hover {
+    button:hover {
       background: #e68900;
+    }
+    /* Disabled state */
+    button:disabled {
+      background: #555;
+      cursor: not-allowed;
     }
   </style>
 </head>
 <body>
   <header>
-    <img class="logo" src="https://dogofbitcoin.com/dog_logo.svg" alt="Dog of Bitcoin Logo">
-    <h1>$DOG | Genesis - Burn To Mint</h1>
+    <div class="header-left">
+      <img class="logo" src="https://dogofbitcoin.com/dog_logo.svg" alt="Dog of Bitcoin Logo">
+    </div>
+    <div class="header-center">
+      <h1>$DOG | Genesis - Burn To Mint</h1>
+    </div>
+    <div class="header-right">
+      <nav>
+        <a href="https://dogofbitcoin.com" target="_blank">Dog of Bitcoin</a>
+      </nav>
+    </div>
   </header>
-  <div class="container">
+
+  <!-- Phase 1: Text Instructions -->
+  <div class="instructions-phase" id="phase1">
+    <h2>Instructions - Burn To Mint for S2 Whitelist</h2>
+    <p>
+      📢 <strong>IMPORTANT:</strong> There are three ways to get your hands on Season 2 Dog of Bitcoin Ordinals:
+    </p>
+    <p>
+      1️⃣ <strong>Option 1:</strong> Burn your <strong>$DOG | Genesis - Season 1</strong> ordinal to receive <strong>two whitelist spots</strong> for a free Season 2 mint.
+    </p>
+    <p>
+      2️⃣ <strong>Option 2:</strong> Purchase the Season 2 ordinals from the leftover free mint allocation.
+    </p>
+    <p>
+      3️⃣ <strong>Option 3:</strong> Get a free Season 2 ordinal with the purchase of a Season 2 plushie.
+    </p>
+    <p>
+      <strong>Note:</strong> Options 2 and 3 will be available at a later time. This app is designed to help you with <strong>Option 1</strong> – the burn-to-mint flow.
+    </p>
+    <p>
+      If you are interested in the burn-to-mint flow, please proceed to watch the demonstration video.
+    </p>
+    <button id="phase1Btn">Proceed to Demonstration Video</button>
+  </div>
+
+  <!-- Phase 2: Demonstration Video -->
+  <div class="instructions-phase" id="phase2" style="display:none;">
+    <h2>Demo: Burn-to-Mint Flow</h2>
+    <p>
+      ▶️ Watch the video below to see the burn-to-mint process in action and learn how to safely burn your ordinal to secure two whitelist spots for Dog of Bitcoin Season Two.
+    </p>
+    <!-- YouTube Embed Code with API enabled and additional parameters -->
+    <iframe id="demoVideo" src="https://www.youtube.com/embed/klhaXOuBCck?enablejsapi=1&rel=0&modestbranding=1&si=xDR_BE4_aJC-ampL" 
+            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <!-- Full-width proceed button with custom tooltip -->
+    <button id="phase2Btn" style="display:block; width:100%;" disabled data-tooltip="Please watch the full video to proceed">Proceed with Burn Steps</button>
+  </div>
+
+  <!-- Phase 3: Main App Flow -->
+  <div class="container" id="phase3" style="display:none;">
+    <!-- Collapsed Accordion for Reviewing Instructions -->
+    <div class="accordion">
+      <div class="accordion-header">
+        <div>📖🎥 Instructions (Tap to Expand)</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-content">
+        <p>
+          These are the same instructions as seen in previous steps. Mentioned here for your quick reference if needed.
+        </p>
+        <p>
+          <strong>Note:</strong> The burn-to-mint flow (Option 1) is only one of three ways to acquire Dog of Bitcoin Season Two Ordinals:
+        </p>
+        <ul>
+          <li><strong>Option 1:</strong> Burn your <strong>$DOG | Genesis - Season 1</strong> ordinal to secure two whitelist spots for a free Season 2 mint. (Available now)</li>
+          <li><strong>Option 2:</strong> Purchase the Season 2 ordinals from the leftover free mint allocation. (Coming soon)</li>
+          <li><strong>Option 3:</strong> Get a free Season 2 ordinal with the purchase of a Season 2 plushie. (Coming soon)</li>
+        </ul>
+        <p>
+          If you wish to proceed with the burn-to-mint flow, follow the instructions below.
+        </p>
+        <iframe src="https://www.youtube.com/embed/klhaXOuBCck?rel=0&modestbranding=1&si=xDR_BE4_aJC-ampL" 
+                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <!-- Supply Data Section -->
     <div class="count-box">
       Total Supply: <span id="totalSupply">Loading...</span>
     </div>
@@ -81,9 +255,76 @@
       Burned: <span id="burnedCount">Loading...</span>
     </div>
     <button id="refreshBtn">Refresh Count</button>
+
+    <!-- Commitment Warning Section -->
+    <div class="warning">
+      <p>
+        I understand that by clicking the "Proceed To Burn" button below I am committing to burning my <strong>$DOG | Genesis - Season 1</strong> ordinal.
+        I acknowledge that if I burn my <strong>$DOG | Genesis - Season 1</strong> ordinal after 250 ordinals have been burned, I will lose it forever and will not receive access to <strong>Dog of Bitcoin Season Two</strong>.
+      </p>
+      <label>
+        <input type="checkbox" id="commitCheckbox">
+        I understand and agree.
+      </label>
+    </div>
+
+    <!-- CTA Section: Full-width button -->
+    <button id="ctaBtn" disabled style="display:block; width:100%;">Proceed To Burn</button>
   </div>
 
+  <!-- Load YouTube IFrame API -->
   <script>
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var demoPlayer;
+    function onYouTubeIframeAPIReady() {
+      demoPlayer = new YT.Player('demoVideo', {
+        events: {
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+    function onPlayerStateChange(event) {
+      // Enable the Phase 2 button only when the video has ended.
+      if (event.data === YT.PlayerState.ENDED) {
+        document.getElementById('phase2Btn').disabled = false;
+        document.getElementById('phase2Btn').removeAttribute("data-tooltip");
+      }
+    }
+  </script>
+
+  <script>
+    // Phase 1: Proceed from Text Instructions to Demonstration Video.
+    document.getElementById('phase1Btn').addEventListener('click', () => {
+      document.getElementById('phase1').style.display = 'none';
+      document.getElementById('phase2').style.display = 'block';
+    });
+    
+    // Phase 2: Proceed from Demonstration Video to Main App Flow.
+    document.getElementById('phase2Btn').addEventListener('click', () => {
+      document.getElementById('phase2').style.display = 'none';
+      document.getElementById('phase3').style.display = 'block';
+    });
+
+    // Accordion toggle functionality in Phase 3.
+    const accordionHeader = document.querySelector('.accordion-header');
+    const accordionContent = document.querySelector('.accordion-content');
+    const arrowIcon = document.querySelector('.accordion-header .arrow');
+
+    accordionHeader.addEventListener('click', () => {
+      if (accordionContent.style.display === 'block') {
+        accordionContent.style.display = 'none';
+        arrowIcon.style.transform = 'rotate(0deg)';
+      } else {
+        accordionContent.style.display = 'block';
+        arrowIcon.style.transform = 'rotate(180deg)';
+      }
+    });
+
+    // Supply data fetch function.
     async function countInscriptions() {
       let totalSupply = 0;
       let vindicatedCount = 0;
@@ -91,7 +332,6 @@
       let page = 0;
       let more = true;
       
-      // Dynamically fetch pages until no more pages are available.
       while (more) {
         const url = `https://ordinals.com/r/children/d45478cab2e1ebc295c6bbc85dae505aae417e088a23c0c8e6d33bfe345b992ei0/inscriptions/${page}`;
         try {
@@ -115,28 +355,38 @@
           page++;
         } catch (error) {
           console.error(`Error fetching page ${page}:`, error);
-          more = false; // Stop if there's an error
+          more = false;
         }
       }
       
-      // Calculate circulating supply as vindicated minus burned.
       const circulatingSupply = vindicatedCount - burnedCount;
       
-      // Update the UI with the counts
       document.getElementById('totalSupply').textContent = totalSupply;
       document.getElementById('circulatingSupply').textContent = circulatingSupply;
       document.getElementById('burnedCount').textContent = burnedCount;
     }
 
-    // Run the count function on page load.
+    // Run supply count on Phase 3 load.
     countInscriptions();
 
-    // Refresh the counts on button click.
+    // Refresh supply count on button click.
     document.getElementById('refreshBtn').addEventListener('click', () => {
       document.getElementById('totalSupply').textContent = "Loading...";
       document.getElementById('circulatingSupply').textContent = "Loading...";
       document.getElementById('burnedCount').textContent = "Loading...";
       countInscriptions();
+    });
+
+    // Enable CTA button only when the commitment checkbox is checked.
+    const commitCheckbox = document.getElementById('commitCheckbox');
+    const ctaBtn = document.getElementById('ctaBtn');
+    commitCheckbox.addEventListener('change', () => {
+      ctaBtn.disabled = !commitCheckbox.checked;
+    });
+
+    // Open external link in a new tab on CTA click.
+    ctaBtn.addEventListener('click', () => {
+      window.open('https://tx.dev/burn/inscriptions/many?collection=dog_of_bitcoin', '_blank');
     });
   </script>
 </body>
