@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Burn To Mint</title>
   
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="https://dogofbitcoin.com/dog_logo.svg">
-  
   <!-- Open Graph / Facebook Meta Tags -->
   <meta property="og:title" content="Burn To Mint">
   <meta property="og:description" content="Get your Szn 2 Dog of Bitcoin Ordinal by burning your Szn 1 $DOG | Genesis ordinal.">
@@ -24,6 +21,9 @@
   
   <!-- Canonical URL -->
   <link rel="canonical" href="https://burn.dogofbitcoin.com/">
+  
+  <!-- Favicon (using the Dog of Bitcoin logo) -->
+  <link rel="icon" type="image/svg+xml" href="https://dogofbitcoin.com/dog_logo.svg">
   
   <!-- Google Font inspired by Dog of Bitcoin's bold look -->
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
@@ -431,11 +431,18 @@
       // Hide loading screen.
       document.getElementById('loadingPhase').style.display = 'none';
       
-      // If burned count reaches 200, show Phase 4; otherwise, show Phase 1.
+      // When refreshing: if burned count is 200 or more, switch to Phase 4;
+      // otherwise, if the user is already in Phase 3, remain in Phase 3.
       if (burnedCount >= 200) {
+        document.getElementById('phase1').style.display = 'none';
+        document.getElementById('phase2').style.display = 'none';
+        document.getElementById('phase3').style.display = 'none';
         document.getElementById('phase4').style.display = 'block';
       } else {
-        document.getElementById('phase1').style.display = 'block';
+        // If user is not already in Phase 3, default to Phase 1.
+        if (document.getElementById('phase3').style.display !== 'block') {
+          document.getElementById('phase1').style.display = 'block';
+        }
       }
     }
 
