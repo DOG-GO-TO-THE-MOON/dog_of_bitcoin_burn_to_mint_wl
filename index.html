@@ -3,9 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>$DOG | Genesis - Burn To Mint</title>
+  <title>Burn To Mint</title>
+  
+  <!-- Open Graph / Facebook Meta Tags -->
+  <meta property="og:title" content="Burn To Mint">
+  <meta property="og:description" content="Get your Szn 2 Dog of Bitcoin Ordinal by burning your Szn 1 $DOG | Genesis ordinal.">
+  <meta property="og:image" content="https://burn.dogofbitcoin.com/Metadata-Dog-4.jpg">
+  <meta property="og:url" content="https://burn.dogofbitcoin.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Burn To Mint">
+  <meta name="twitter:description" content="Get your Szn 2 Dog of Bitcoin Ordinal by burning your Szn 1 $DOG | Genesis ordinal.">
+  <meta name="twitter:image" content="https://burn.dogofbitcoin.com/Metadata-Dog-4.jpg">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://burn.dogofbitcoin.com/">
+  
   <!-- Google Font inspired by Dog of Bitcoin's bold look -->
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+  
   <style>
     /* Base styling: Dark background for the whole page */
     body {
@@ -34,12 +53,8 @@
       text-align: center;
       flex: 1;
     }
-    .header-right nav a {
-      color: #ff9800;
-      text-decoration: none;
-    }
     /* Container for main sections */
-    .container, .instructions-phase {
+    .container, .instructions-phase, .container-gap {
       max-width: 800px;
       width: 90%;
       margin: 2rem auto;
@@ -47,6 +62,12 @@
       background: #111;
       border: 1px solid #333;
       border-radius: 4px;
+    }
+    /* Loading screen styling */
+    #loadingPhase {
+      text-align: center;
+      font-size: 1.5rem;
+      padding: 2rem;
     }
     /* Phase 1: Text Instructions styling */
     .instructions-phase h2 {
@@ -160,37 +181,72 @@
       background: #555;
       cursor: not-allowed;
     }
+    /* Phase 4: Burn To Mint Cap Reached styling */
+    #phase4 {
+      text-align: center;
+    }
+    #phase4 h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    #phase4 p {
+      font-size: 1.2rem;
+      margin: 1rem 0;
+    }
+    /* Buttons for Phase 4 */
+    .phase4-btn {
+      display: inline-block;
+      margin: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: #ff9800;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .phase4-btn:hover {
+      background: #e68900;
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="header-left">
-      <img class="logo" src="https://dogofbitcoin.com/dog_logo.svg" alt="Dog of Bitcoin Logo">
+      <a href="https://dogofbitcoin.com" target="_blank">
+        <img class="logo" src="https://dogofbitcoin.com/dog_logo.svg" alt="Dog of Bitcoin Logo">
+      </a>
     </div>
     <div class="header-center">
-      <h1>$DOG | Genesis - Burn To Mint</h1>
+      <h1>Burn To Mint</h1>
     </div>
     <div class="header-right">
-      <nav>
-        <a href="https://dogofbitcoin.com" target="_blank">Dog of Bitcoin</a>
-      </nav>
+      <!-- No additional link -->
     </div>
   </header>
 
+  <!-- Loading Phase: Display while fetching supply data -->
+  <div class="instructions-phase" id="loadingPhase">
+    <h2>Loading Supply Data...</h2>
+    <p>Please wait while we retrieve the latest burn and supply counts.</p>
+  </div>
+
   <!-- Phase 1: Text Instructions -->
-  <div class="instructions-phase" id="phase1">
-    <h2>Instructions - Burn To Mint for S2 Whitelist</h2>
+  <div class="instructions-phase" id="phase1" style="display:none;">
+    <h2>Instructions - Burn To Mint for Szn 2 Whitelist</h2>
     <p>
-      📢 <strong>IMPORTANT:</strong> There are three ways to get your hands on Season 2 Dog of Bitcoin Ordinals:
+      📢 <strong>IMPORTANT:</strong> There are three ways to get your hands on Szn 2 Dog of Bitcoin Ordinals:
     </p>
     <p>
-      1️⃣ <strong>Option 1:</strong> Burn your <strong>$DOG | Genesis - Season 1</strong> ordinal to receive <strong>two whitelist spots</strong> for a free Season 2 mint.
+      1️⃣ <strong>Option 1:</strong> Burn your <strong>$DOG | Genesis - SZN I</strong> ordinal to receive <strong>2x GTD whitelist spots</strong> for the exclusive "<em>Block 9 450x SZN II collection</em>" | QTY 500.
     </p>
     <p>
-      2️⃣ <strong>Option 2:</strong> Purchase the Season 2 ordinals from the leftover free mint allocation.
+      2️⃣ <strong>Option 2:</strong> Purchase the <strong>Season II</strong> ordinals from the leftover exclusive "<em>Block 9 450x mint collection</em>" | QTY 500.
     </p>
     <p>
-      3️⃣ <strong>Option 3:</strong> Get a free Season 2 ordinal with the purchase of a Season 2 plushie.
+      3️⃣ <strong>Option 3:</strong> Get a free <strong>Season II ordinal mint</strong> from the <strong>SZN II Trump Sats collection</strong> | QTY 1,000, with the purchase of a <strong>Season II plushie</strong>.
     </p>
     <p>
       <strong>Note:</strong> Options 2 and 3 will be available at a later time. This app is designed to help you with <strong>Option 1</strong> – the burn-to-mint flow.
@@ -205,13 +261,11 @@
   <div class="instructions-phase" id="phase2" style="display:none;">
     <h2>Demo: Burn-to-Mint Flow</h2>
     <p>
-      ▶️ Watch the video below to see the burn-to-mint process in action and learn how to safely burn your ordinal to secure two whitelist spots for Dog of Bitcoin Season Two.
+      ▶️ Watch the video below to see the burn-to-mint process in action and learn how to safely burn your ordinal to secure two whitelist spots for Dog of Bitcoin Szn 2.
     </p>
-    <!-- YouTube Embed Code with API enabled and additional parameters -->
     <iframe id="demoVideo" src="https://www.youtube.com/embed/klhaXOuBCck?enablejsapi=1&rel=0&modestbranding=1&si=xDR_BE4_aJC-ampL" 
             title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    <!-- Full-width proceed button with custom tooltip -->
     <button id="phase2Btn" style="display:block; width:100%;" disabled data-tooltip="Please watch the full video to proceed">Proceed with Burn Steps</button>
   </div>
 
@@ -228,12 +282,12 @@
           These are the same instructions as seen in previous steps. Mentioned here for your quick reference if needed.
         </p>
         <p>
-          <strong>Note:</strong> The burn-to-mint flow (Option 1) is only one of three ways to acquire Dog of Bitcoin Season Two Ordinals:
+          <strong>Note:</strong> The burn-to-mint flow (Option 1) is only one of three ways to acquire Dog of Bitcoin Szn 2 Ordinals:
         </p>
         <ul>
-          <li><strong>Option 1:</strong> Burn your <strong>$DOG | Genesis - Season 1</strong> ordinal to secure two whitelist spots for a free Season 2 mint. (Available now)</li>
-          <li><strong>Option 2:</strong> Purchase the Season 2 ordinals from the leftover free mint allocation. (Coming soon)</li>
-          <li><strong>Option 3:</strong> Get a free Season 2 ordinal with the purchase of a Season 2 plushie. (Coming soon)</li>
+          <li><strong>Option 1:</strong> Burn your <strong>$DOG | Genesis - SZN I</strong> ordinal to receive <strong>2x GTD whitelist spots</strong> for the exclusive "<em>Block 9 450x SZN II collection</em>" | QTY 500. (Available now)</li>
+          <li><strong>Option 2:</strong> Purchase the <strong>Season II</strong> ordinals from the leftover exclusive "<em>Block 9 450x mint collection</em>" | QTY 500. (Coming soon)</li>
+          <li><strong>Option 3:</strong> Get a free <strong>Season II ordinal mint</strong> from the <strong>SZN II Trump Sats collection</strong> | QTY 1,000, with the purchase of a <strong>Season II plushie</strong>. (Coming soon)</li>
         </ul>
         <p>
           If you wish to proceed with the burn-to-mint flow, follow the instructions below.
@@ -259,8 +313,8 @@
     <!-- Commitment Warning Section -->
     <div class="warning">
       <p>
-        I understand that by clicking the "Proceed To Burn" button below I am committing to burning my <strong>$DOG | Genesis - Season 1</strong> ordinal.
-        I acknowledge that if I burn my <strong>$DOG | Genesis - Season 1</strong> ordinal after 250 ordinals have been burned, I will lose it forever and will not receive access to <strong>Dog of Bitcoin Season Two</strong>.
+        I understand that by clicking the "Proceed To Burn" button below I am committing to burning my <strong>$DOG | Genesis - SZN I</strong> ordinal.
+        I acknowledge that if I burn my <strong>$DOG | Genesis - SZN I</strong> ordinal after 250 ordinals have been burned, I will lose it forever and will not receive access to <strong>Dog of Bitcoin Szn 2</strong>.
       </p>
       <label>
         <input type="checkbox" id="commitCheckbox">
@@ -270,6 +324,17 @@
 
     <!-- CTA Section: Full-width button -->
     <button id="ctaBtn" disabled style="display:block; width:100%;">Proceed To Burn</button>
+  </div>
+
+  <!-- Phase 4: Burn To Mint Cap Reached -->
+  <div class="container" id="phase4" style="display:none; text-align: center;">
+    <h2>Burn To Mint Cap Reached</h2>
+    <p>The burn-to-mint cap for Szn 2 has been reached.</p>
+    <p>To stay updated on the release of Szn 2 and the mint dates, please follow our updates:</p>
+    <div style="margin-top: 1rem;">
+      <a href="https://x.com/DogOfBitcoin" target="_blank" class="phase4-btn">Follow on X</a>
+      <a href="https://discord.com/invite/dogofbitcoin" target="_blank" class="phase4-btn">Join Discord</a>
+    </div>
   </div>
 
   <!-- Load YouTube IFrame API -->
@@ -297,13 +362,19 @@
   </script>
 
   <script>
-    // Phase 1: Proceed from Text Instructions to Demonstration Video.
+    // Initially hide all phases and show the loading screen.
+    document.getElementById('phase1').style.display = 'none';
+    document.getElementById('phase2').style.display = 'none';
+    document.getElementById('phase3').style.display = 'none';
+    document.getElementById('phase4').style.display = 'none';
+
+    // Phase 1 button click: hide phase1, show phase2.
     document.getElementById('phase1Btn').addEventListener('click', () => {
       document.getElementById('phase1').style.display = 'none';
       document.getElementById('phase2').style.display = 'block';
     });
     
-    // Phase 2: Proceed from Demonstration Video to Main App Flow.
+    // Phase 2 button click: hide phase2, show phase3.
     document.getElementById('phase2Btn').addEventListener('click', () => {
       document.getElementById('phase2').style.display = 'none';
       document.getElementById('phase3').style.display = 'block';
@@ -313,7 +384,6 @@
     const accordionHeader = document.querySelector('.accordion-header');
     const accordionContent = document.querySelector('.accordion-content');
     const arrowIcon = document.querySelector('.accordion-header .arrow');
-
     accordionHeader.addEventListener('click', () => {
       if (accordionContent.style.display === 'block') {
         accordionContent.style.display = 'none';
@@ -337,7 +407,6 @@
         try {
           const response = await fetch(url);
           const data = await response.json();
-          
           if (data.children && Array.isArray(data.children)) {
             data.children.forEach(child => {
               totalSupply++;
@@ -360,13 +429,24 @@
       }
       
       const circulatingSupply = vindicatedCount - burnedCount;
-      
       document.getElementById('totalSupply').textContent = totalSupply;
       document.getElementById('circulatingSupply').textContent = circulatingSupply;
       document.getElementById('burnedCount').textContent = burnedCount;
+      
+      // Hide loading screen.
+      document.getElementById('loadingPhase').style.display = 'none';
+      
+      // If burned count reaches 200, show Phase 4; otherwise, show Phase 1.
+      if (burnedCount >= 200) {
+        document.getElementById('phase4').style.display = 'block';
+      } else {
+        document.getElementById('phase1').style.display = 'block';
+      }
     }
 
-    // Run supply count on Phase 3 load.
+    // Initially, show the loading screen.
+    document.getElementById('loadingPhase').style.display = 'block';
+    // Run supply count on page load.
     countInscriptions();
 
     // Refresh supply count on button click.
