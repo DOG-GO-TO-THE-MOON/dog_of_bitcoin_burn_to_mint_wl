@@ -148,7 +148,7 @@
       padding: 1rem;
       background: #222;
     }
-    /* Supply Data Section */
+    /* Phase 3 Supply Data Section */
     .count-box {
       margin-bottom: 1.5rem;
       font-size: 1.5rem;
@@ -243,7 +243,7 @@
       1️⃣ <strong>Option 1:</strong> Burn your <strong>$DOG | Genesis - SZN I</strong> ordinal to receive <strong>2x GTD whitelist spots</strong> for the exclusive "<em>Block 9 450x SZN II collection</em>" | QTY 500.
     </p>
     <p>
-      2️⃣ <strong>Option 2:</strong> Purchase the <strong>Season II</strong> ordinals from the leftover exclusive "<em>Block 9 450x mint collection</em>" | QTY 500.
+      2️⃣ <strong>Option 2:</strong> Purchase the <strong>Szn 2</strong> ordinals from the leftover exclusive "<em>Block 9 450x mint collection</em>" | QTY 500.
     </p>
     <p>
       3️⃣ <strong>Option 3:</strong> Get a free <strong>Season II ordinal mint</strong> from the <strong>SZN II Trump Sats collection</strong> | QTY 1,000, with the purchase of a <strong>Season II plushie</strong>.
@@ -286,7 +286,7 @@
         </p>
         <ul>
           <li><strong>Option 1:</strong> Burn your <strong>$DOG | Genesis - SZN I</strong> ordinal to receive <strong>2x GTD whitelist spots</strong> for the exclusive "<em>Block 9 450x SZN II collection</em>" | QTY 500. (Available now)</li>
-          <li><strong>Option 2:</strong> Purchase the <strong>Season II</strong> ordinals from the leftover exclusive "<em>Block 9 450x mint collection</em>" | QTY 500. (Coming soon)</li>
+          <li><strong>Option 2:</strong> Purchase the <strong>Szn 2</strong> ordinals from the leftover exclusive "<em>Block 9 450x mint collection</em>" | QTY 500. (Coming soon)</li>
           <li><strong>Option 3:</strong> Get a free <strong>Season II ordinal mint</strong> from the <strong>SZN II Trump Sats collection</strong> | QTY 1,000, with the purchase of a <strong>Season II plushie</strong>. (Coming soon)</li>
         </ul>
         <p>
@@ -300,10 +300,10 @@
 
     <!-- Supply Data Section -->
     <div class="count-box">
-      Total Supply: <span id="totalSupply">Loading...</span>
+      Total Supply: <span id="totalSupply">1000</span>
     </div>
     <div class="count-box">
-      Circulating Supply (vindicated minus burned): <span id="circulatingSupply">Loading...</span>
+      Circulating Supply: <span id="circulatingSupply">Loading...</span>
     </div>
     <div class="count-box">
       Burned: <span id="burnedCount">Loading...</span>
@@ -396,8 +396,6 @@
 
     // Supply data fetch function.
     async function countInscriptions() {
-      let totalSupply = 0;
-      let vindicatedCount = 0;
       let burnedCount = 0;
       let page = 0;
       let more = true;
@@ -409,14 +407,8 @@
           const data = await response.json();
           if (data.children && Array.isArray(data.children)) {
             data.children.forEach(child => {
-              totalSupply++;
-              if (child.charms && Array.isArray(child.charms)) {
-                if (child.charms.includes("vindicated")) {
-                  vindicatedCount++;
-                }
-                if (child.charms.includes("burned")) {
-                  burnedCount++;
-                }
+              if (child.charms && Array.isArray(child.charms) && child.charms.includes("burned")) {
+                burnedCount++;
               }
             });
           }
@@ -428,10 +420,10 @@
         }
       }
       
-      const circulatingSupply = vindicatedCount - burnedCount;
-      document.getElementById('totalSupply').textContent = totalSupply;
-      document.getElementById('circulatingSupply').textContent = circulatingSupply;
+      // Set fixed total supply of 1000.
+      document.getElementById('totalSupply').textContent = 1000;
       document.getElementById('burnedCount').textContent = burnedCount;
+      document.getElementById('circulatingSupply').textContent = 1000 - burnedCount;
       
       // Hide loading screen.
       document.getElementById('loadingPhase').style.display = 'none';
@@ -451,8 +443,6 @@
 
     // Refresh supply count on button click.
     document.getElementById('refreshBtn').addEventListener('click', () => {
-      document.getElementById('totalSupply').textContent = "Loading...";
-      document.getElementById('circulatingSupply').textContent = "Loading...";
       document.getElementById('burnedCount').textContent = "Loading...";
       countInscriptions();
     });
