@@ -37,7 +37,7 @@
       background: #000;
       color: #fff;
     }
-    /* Header styling with left, center, and right sections */
+    /* Header styling */
     header {
       display: flex;
       align-items: center;
@@ -100,7 +100,7 @@
     .instructions-phase button:hover {
       background: #e68900;
     }
-    /* Custom tooltip for disabled button in Phase 2 */
+    /* Tooltip for disabled button in Phase 2 */
     .instructions-phase button[disabled] {
       position: relative;
     }
@@ -119,13 +119,13 @@
       z-index: 10;
       pointer-events: none;
     }
-    /* Responsive YouTube embeds with proper aspect ratio */
+    /* Responsive YouTube embeds */
     iframe {
       width: 100%;
       aspect-ratio: 16 / 9;
       margin: 1rem 0;
     }
-    /* Accordion for instructions in Phase 3 */
+    /* Accordion styling for Phase 3 */
     .accordion {
       background: #222;
       border: 1px solid #333;
@@ -165,7 +165,15 @@
       margin-bottom: 1.5rem;
       font-size: 1rem;
     }
-    /* Button styling for Refresh and CTA */
+    /* Static alert message styling */
+    .alert-message {
+      display: block; /* Force visibility */
+      color: red;
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    /* Button styling */
     button {
       padding: 0.75rem 1.5rem;
       font-size: 1rem;
@@ -179,12 +187,11 @@
     button:hover {
       background: #e68900;
     }
-    /* Disabled state */
     button:disabled {
       background: #555;
       cursor: not-allowed;
     }
-    /* Phase 4: Burn To Mint Cap Reached styling */
+    /* Phase 4 styling */
     #phase4 {
       text-align: center;
     }
@@ -196,7 +203,6 @@
       font-size: 1.2rem;
       margin: 1rem 0;
     }
-    /* Buttons for Phase 4 */
     .phase4-btn {
       display: inline-block;
       margin: 0.5rem;
@@ -266,7 +272,7 @@
     <p>
       ▶️ Watch the video below to see the burn-to-mint process in action and learn how to safely burn your ordinal to secure two whitelist spots for Dog of Bitcoin Szn 2.
     </p>
-    <iframe id="demoVideo" src="https://www.youtube.com/embed/klhaXOuBCck?enablejsapi=1&rel=0&modestbranding=1&si=xDR_BE4_aJC-ampL" 
+    <iframe id="demoVideo" src="https://www.youtube.com/embed/7T1nFEyxC9k?enablejsapi=1&rel=0&modestbranding=1" 
             title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     <button id="phase2Btn" style="display:block; width:100%;" disabled data-tooltip="Please watch the full video to proceed">Proceed with Burn Steps</button>
@@ -295,7 +301,7 @@
         <p>
           If you wish to proceed with the burn-to-mint flow, follow the instructions below.
         </p>
-        <iframe src="https://www.youtube.com/embed/klhaXOuBCck?rel=0&modestbranding=1&si=xDR_BE4_aJC-ampL" 
+        <iframe src="https://www.youtube.com/embed/7T1nFEyxC9k?rel=0&modestbranding=1" 
                 title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
@@ -323,6 +329,11 @@
         <input type="checkbox" id="commitCheckbox">
         I understand and agree.
       </label>
+    </div>
+
+    <!-- Static alert message placed below the warning and above the CTA button -->
+    <div class="alert-message">
+      ⚠️ Remember to put your ordinal address in the Burn Message (Optional) input field on the next screen, or you will not get whitelisted.
     </div>
 
     <!-- CTA Section: Full-width button -->
@@ -432,15 +443,16 @@
       document.getElementById('loadingPhase').style.display = 'none';
       
       // When refreshing: if burned count is 200 or more, switch to Phase 4;
-      // otherwise, if the user is already in Phase 3, remain in Phase 3.
+      // otherwise, if already in Phase 3, remain there.
       if (burnedCount >= 200) {
         document.getElementById('phase1').style.display = 'none';
         document.getElementById('phase2').style.display = 'none';
         document.getElementById('phase3').style.display = 'none';
         document.getElementById('phase4').style.display = 'block';
       } else {
-        // If user is not already in Phase 3, default to Phase 1.
-        if (document.getElementById('phase3').style.display !== 'block') {
+        if (document.getElementById('phase3').style.display === 'block') {
+          // Already in Phase 3; do nothing.
+        } else {
           document.getElementById('phase1').style.display = 'block';
         }
       }
@@ -464,7 +476,7 @@
       ctaBtn.disabled = !commitCheckbox.checked;
     });
 
-    // Open external link in a new tab on CTA click.
+    // On CTA click, open the tx.dev link in a new tab.
     ctaBtn.addEventListener('click', () => {
       window.open('https://tx.dev/burn/inscriptions/many?collection=dog_of_bitcoin', '_blank');
     });
